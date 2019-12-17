@@ -3,20 +3,18 @@
 
 
 class Game:
-    def __init__(self, round_count, dices_1, dices_2):
+    def __init__(self, round_count, player_one, player_two):
         self.round_count = round_count
-        self.dices_1 = dices_1
-        self.dices_2 = dices_2
         self.result_1 = 0
         self.result_2 = 0
+        self.player_one = player_one
+        self.player_two = player_two
 
 
 
-    def roll_all_dices(self, dices):
-
+    def roll_all_dices(self, dices_list):
         result = 0
-
-        for dice in dices:
+        for dice in dices_list:
             result += dice.roll()
 
         return result
@@ -24,17 +22,19 @@ class Game:
 
 
 
-
     def play(self):
-        i = 0
-        while i < self.round_count:
-            self.result_1 += self.roll_all_dices(self.dices_1)
-            self.result_2 += self.roll_all_dices(self.dices_2)
-            i += 1
+        for _ in range(self.round_count):
+            self.result_1 += self.roll_all_dices(self.player_one.dice_list)
+            self.result_2 += self.roll_all_dices(self.player_two.dice_list)
+            self.compare_results(self.result_1, self.result_2)
 
-
-
-
+    def compare_results(self, result_1, result_2):
+        if result_1 > result_2:
+            self.player_one.wins += 1
+            self.player_two.loses += 1
+        else:
+            self.player_one.loses += 1
+            self.player_two.wins += 1
 
 
 

@@ -12,6 +12,7 @@ class Game:
 
 
 
+
     def roll_all_dices(self, dices_list):
         result = 0
         for dice in dices_list:
@@ -32,9 +33,15 @@ class Game:
         if result_1 > result_2:
             self.player_one.wins += 1
             self.player_two.loses += 1
-        else:
+            self.player_one.money += 10
+            self.player_two.money -= 10
+        elif result_2 > result_1:
             self.player_one.loses += 1
             self.player_two.wins += 1
+            self.player_one.money -= 10
+            self.player_two.money += 10
+        
+
 
 
 

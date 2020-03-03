@@ -40,7 +40,7 @@ class Game:
             self.player_two.wins += 1
             self.player_one.money -= 10
             self.player_two.money += 10
-        
+
 
 
 

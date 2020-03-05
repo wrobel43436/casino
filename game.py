@@ -13,9 +13,9 @@ class Game:
 
 
 
-    def roll_all_dices(self, dices_list):
+    def roll_all_dices(self, dice_list):
         result = 0
-        for dice in dices_list:
+        for dice in dice_list:
             result += dice.roll()
 
         return result

@@ -1,0 +1,1 @@
+handled_servers = ['gmail', 'wp', 'onet', 'foo']

@@ -4,7 +4,7 @@ from gbl_const import handled_servers
 from models.user import User
 from player import Player
 from game import Game
-
+from validators.validator import validate_return_json
 
 appl = Flask(__name__, template_folder='')
 
@@ -47,57 +47,14 @@ def create_user():
 
 @appl.route('/user', methods = ['POST'])
 def return_json():
+    result = validate_return_json(request)
+    if result is not None:
+        print(result)
+        return result
     user = User()
     user.from_json(request.json)
     user.first_name = 'lukasz'
-
-
-    json = request.json
-    #     # response = {'missing': [], 'wrong': []}
-    #     #
-    #     #
-    #     # #if 'email' not in json:
-    #     #     #response['missing'].append['email']
-    #     # #else:
-    #     # email = json['email']
-    #     # splited_email = email.split('@')
-    #     #
-    #     # if len(splited_email) != 2:
-    #     #     response['wrong'].append('email')
-    #     #
-    #     # email_server = splited_email[1]
-    #     # server = email_server.split('.')
-    #     #
-    #     # if server[0] not in handled_servers:
-    #     #     response['wrong'].append('email not supported')
-    #     #
-    #     # if 'first_name' not in json:
-    #     #     response['missing'].append('first_name')
-    #     #
-    #     # if 'last_name' not in json:
-    #     #     response['missing'].append('last_name')
-    #     #
-    #     # if 'is_admin' not in json:
-    #     #     response['missing'].append('is_admin')
-    #     #
-    #     # if 'is_active' not in json:
-    #     #     response['missing'].append('is_active')
-    #     #
-    #     # if 'last_login' not in json:
-    #     #     response['missing'].append('ast_lgoin')
-    #     #
-    #     # if 'password' not in json:
-    #     #     response['missing'].append('password')
-
-    #
-    # if len(response['missing']) + len(response['wrong']) > 0:
-    #     return response, 400
-    user_one = user.to_json()
-    return user_one
-
-
-
-
+    return user.to_json()
 
 @appl.route('/index')
 def index():
